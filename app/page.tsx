@@ -1,24 +1,4 @@
-import { DatabaseStatus } from "@/components/features/DatabaseStatus"
-import { createClient } from "@/lib/supabase/server"
-import type { DemoItem } from "@/types"
-import { Suspense } from "react"
-
-async function fetchDemoItems(): Promise<{ items: DemoItem[] | null; error: string | null }> {
-  try {
-    const supabase = await createClient()
-    const { data, error } = await supabase.from("demo_items").select("*").order("id")
-
-    if (error) return { items: null, error: "Database connection failed" }
-    return { items: data as DemoItem[], error: null }
-  } catch {
-    return { items: null, error: "Failed to connect to database" }
-  }
-}
-
-async function HomeContent() {
-  const { items, error } = await fetchDemoItems()
-  return <DatabaseStatus items={items} error={error} />
-}
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -36,27 +16,53 @@ export default function Home() {
       }}
     >
       <header style={{ textAlign: "center" }}>
-        <h1 style={{ margin: "0 0 0.5rem", fontSize: "2rem" }}>🚀 Hackathon Starter</h1>
-        <p style={{ margin: 0, color: "var(--color-muted)" }}>
-          Next.js 15 + Supabase template — replace this page with your project
+        <h1 style={{ margin: "0 0 0.5rem", fontSize: "2.5rem" }}>⚡ 閃き対決</h1>
+        <p style={{ margin: 0, color: "#718096", fontSize: "1.1rem" }}>
+          AIのお題に60秒でアイデアを出し、採点してもらおう！
         </p>
       </header>
 
-      <section style={{ width: "100%" }}>
-        <Suspense
-          fallback={
-            <div style={{ padding: "1.5rem", color: "var(--color-muted)", textAlign: "center" }}>
-              Checking database connection…
-            </div>
-          }
+      <section
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+          width: "100%",
+          maxWidth: "320px",
+        }}
+      >
+        <Link
+          href="/game"
+          style={{
+            display: "block",
+            textAlign: "center",
+            padding: "1rem 2rem",
+            fontSize: "1.25rem",
+            fontWeight: "bold",
+            background: "#4299e1",
+            color: "#fff",
+            borderRadius: "8px",
+            textDecoration: "none",
+          }}
         >
-          <HomeContent />
-        </Suspense>
+          スタート
+        </Link>
+        <Link
+          href="/history"
+          style={{
+            display: "block",
+            textAlign: "center",
+            padding: "0.75rem 2rem",
+            fontSize: "1rem",
+            color: "#4299e1",
+            border: "1px solid #4299e1",
+            borderRadius: "8px",
+            textDecoration: "none",
+          }}
+        >
+          スコア履歴
+        </Link>
       </section>
-
-      <footer style={{ fontSize: "0.75rem", color: "var(--color-muted)", textAlign: "center" }}>
-        See <code>docs/spec-kit/README.md</code> to start building with spec-kit
-      </footer>
     </main>
-  )
+  );
 }

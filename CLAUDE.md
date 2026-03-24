@@ -1,6 +1,8 @@
 # hackathon-starter Development Guidelines
 
 ## Active Technologies
+- TypeScript 5.7, Node.js (Next.js runtime) + Next.js 15, `openai` SDK, `@supabase/supabase-js` v2, `@supabase/ssr` v0.5 (001-hirameki-battle)
+- Supabase PostgreSQL — `game_scores` table (see data-model.md) (001-hirameki-battle)
 
 - TypeScript 5.3+ + Next.js 15 (App Router), @supabase/supabase-js v2, @supabase/ssr v0.1+, Biome v1.8+, Vitest v1+
 
@@ -61,3 +63,6 @@ git commit -m "chore: sync template improvements from <dev-branch>"
 See CONTRIBUTING.md for the full workflow.
 
 <!-- MANUAL ADDITIONS END -->
+
+## Recent Changes
+- 001-hirameki-battle: Added TypeScript 5.7, Node.js (Next.js runtime) + Next.js 15, `openai` SDK, `@supabase/supabase-js` v2, `@supabase/ssr` v0.5
