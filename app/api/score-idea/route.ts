@@ -1,7 +1,7 @@
-import { getOpenAIClient } from "@/lib/openai";
 import { insertGameScore } from "@/lib/game-scores";
-import OpenAI from "openai";
+import { getOpenAIClient } from "@/lib/openai";
 import { type NextRequest, NextResponse } from "next/server";
+import OpenAI from "openai";
 
 const SCORE_FUNCTION: OpenAI.Chat.Completions.ChatCompletionTool = {
   type: "function",
