@@ -23,7 +23,7 @@ describe("lib/env", () => {
   });
 
   it("throws when NEXT_PUBLIC_SUPABASE_URL is missing", async () => {
-    delete process.env.NEXT_PUBLIC_SUPABASE_URL;
+    process.env.NEXT_PUBLIC_SUPABASE_URL = undefined;
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = "test-anon-key";
 
     await expect(import("@/lib/env")).rejects.toThrow(
@@ -33,7 +33,7 @@ describe("lib/env", () => {
 
   it("throws when NEXT_PUBLIC_SUPABASE_ANON_KEY is missing", async () => {
     process.env.NEXT_PUBLIC_SUPABASE_URL = "https://test.supabase.co";
-    delete process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = undefined;
 
     await expect(import("@/lib/env")).rejects.toThrow(
       "Missing required environment variable: NEXT_PUBLIC_SUPABASE_ANON_KEY",
